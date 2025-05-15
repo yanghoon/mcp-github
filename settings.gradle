@@ -1,0 +1,3 @@
+rootProject.name = 'slim-ai-github'
+
+include 'mcp-server'
