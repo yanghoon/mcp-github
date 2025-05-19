@@ -7,7 +7,10 @@
 ## Test with MCP Inspector
 
 ```bash
-npx @modelcontextprotocol/inspector
+# npx @modelcontextprotocol/inspector
+git clone https://github.com/modelcontextprotocol/inspector && cd inspector
+npm install
+npm run dev
 ```
 
 ### Test Scenario

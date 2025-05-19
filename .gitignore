@@ -50,3 +50,6 @@ build/
 build/
 out/
 bin/
+
+# MCP Inspector Project
+inspector
