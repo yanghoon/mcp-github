@@ -1,0 +1,5 @@
+https://github.com/login/oauth/.well-known/openid-configuration
+# https://github.com/login/oauth/.well-known/oauth-authorization-server
+
+# https://docs.github.com/ko/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps#1-request-a-users-github-identity
+# https://docs.github.com/ko/enterprise-cloud@latest/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-user-access-token-for-a-github-app#using-the-web-application-flow-to-generate-a-user-access-token

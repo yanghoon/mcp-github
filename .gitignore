@@ -53,3 +53,7 @@ bin/
 
 # MCP Inspector Project
 inspector
+
+# Security
+application-default.yaml
+application-default.yml
