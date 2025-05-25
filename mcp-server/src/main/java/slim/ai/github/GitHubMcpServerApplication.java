@@ -43,7 +43,7 @@ public class GitHubMcpServerApplication {
             exchange.pathMatchers(".well-known/**").permitAll();
             exchange.anyExchange().authenticated();
         });
-        // http.oauth2Login(withDefaults());
+        http.oauth2Login(withDefaults());
         http.oauth2Client(withDefaults());
         http.oauth2ResourceServer(oauth2 -> oauth2.jwt(withDefaults()));
         return http.build();
