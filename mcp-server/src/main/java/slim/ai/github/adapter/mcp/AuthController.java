@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import reactor.core.publisher.Mono;
 import slim.ai.github.adapter.mcp.token.OauthTokenProvider;
 
 @RestController
@@ -24,13 +23,8 @@ public class AuthController {
     }
 
     @GetMapping("token")
-    public Mono<Object> token() {
+    public Object token() {
         return tokenProvider.getAccessToken();
-    }
-
-    @GetMapping("github/tools/username")
-    public String username() {
-        return toolHandler.getUsername();
     }
 
 }

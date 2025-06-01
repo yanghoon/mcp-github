@@ -4,7 +4,7 @@
 #   level:
 #     org.springframework.security: TRACE
 
-# Using spring-ai-starter-mcp-server-webflux
+# Using spring-ai-starter-mcp-server-webmvc
 spring:
   ai:
     mcp:
@@ -16,14 +16,44 @@ spring:
 
   security:
     oauth2:
+      authorizationserver:
+        client:
+          public-client:
+            require-authorization-consent: false
+            require-proof-key: true
+            registration:
+              client-id: mcp-client
+              # client-secret: 
+              client-authentication-methods:
+                - none
+              authorization-grant-types:
+                - authorization_code
+              redirect-uris:
+                - http://localhost:6274/oauth/callback
+              scopes:
+                # - openid
+                - profile
+                - email
       resourceserver:
-        # for Authentication by Bearer Token
-        opaquetoken:
-          # MCP Inspector (Dynamic Client Registration)
-          client-id: 
-          client-secret: 
         jwt:
-          issuer-uri: https://dev-xxx.jp.auth0.com/
+          jwk-set-uri: http://localhost:8080/oauth2/jwks
+          jws-algorithms: RS256
+
+---
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: 
+            client-secret: 
+            scope: read:user, user:email
+
+---
+spring:
+  security:
+    oauth2:
       client:
         registration:
           auth0:

@@ -8,9 +8,10 @@
 
 ```bash
 # npx @modelcontextprotocol/inspector
-git clone https://github.com/modelcontextprotocol/inspector && cd inspector
+git clone https://github.com/mcp-auth/inspector && cd inspector
 npm install
-npm run dev
+# npm install vite@4.0.0 && npm audit fix --force
+npm run dev:windows
 ```
 
 ### Test Scenario
