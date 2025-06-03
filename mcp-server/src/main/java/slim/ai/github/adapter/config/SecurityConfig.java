@@ -3,6 +3,8 @@ package slim.ai.github.adapter.config;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
@@ -14,6 +16,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,6 +25,8 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestHeaderRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.util.StringUtils;
@@ -53,6 +58,16 @@ public class SecurityConfig {
 
 		http.authorizeHttpRequests(authz -> authz.anyRequest().authenticated())
 		    .oauth2ResourceServer(resourceServer -> resourceServer.jwt(withDefaults()));
+
+		http.exceptionHandling(ex -> {
+			var htmlRequestMatcher = new MediaTypeRequestMatcher(MediaType.TEXT_HTML);
+			htmlRequestMatcher.setIgnoredMediaTypes(Set.of(MediaType.ALL));
+			ex.defaultAuthenticationEntryPointFor(
+				new LoginUrlAuthenticationEntryPoint("/login"),
+				htmlRequestMatcher
+            );
+        });
+
 
 		return http.build();
 	}

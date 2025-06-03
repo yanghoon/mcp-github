@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import io.modelcontextprotocol.server.McpSyncServerExchange;
 import slim.ai.annotation.Tools;
+import slim.ai.github.adapter.config.aop.McpServerAdvice.McpSecurityContextHolder;
 import slim.ai.github.adapter.mcp.token.OauthTokenProvider;
 
 @Tools
@@ -21,11 +22,7 @@ public class GitHubToolHandler {
      */
     @Tool(description = "Get username")
     public String getUsername(ToolContext context) {
-        McpSyncServerExchange exchange = (McpSyncServerExchange) context.getContext().get("exchange");
-        // McpAsyncServerExchange asyncExchange = exchange.getExchange();
-        // McpServerSession session = asyncExchange.getSession();
-        // var auth = session.getAuthentication();
-        var token = tokenProvider.getAccessToken();
+        var token = McpSecurityContextHolder.accessToken(context);
         return "There are no repositories of " + token;
     }
     
