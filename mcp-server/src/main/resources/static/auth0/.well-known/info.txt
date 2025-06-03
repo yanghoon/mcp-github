@@ -1,1 +1,0 @@
-https://dev-zxfhditn58qg3soj.jp.auth0.com/.well-known/openid-configuration

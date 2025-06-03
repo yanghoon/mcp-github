@@ -13,7 +13,8 @@ spring:
         version: 1.0.0
         type: ASYNC  # Recommended for reactive applications
         sse-message-endpoint: /mcp/messages
-
+---
+spring:
   security:
     oauth2:
       authorizationserver:
@@ -38,7 +39,6 @@ spring:
         jwt:
           jwk-set-uri: http://localhost:8080/oauth2/jwks
           jws-algorithms: RS256
-
 ---
 spring:
   security:
@@ -49,26 +49,25 @@ spring:
             client-id: 
             client-secret: 
             scope: read:user, user:email
-
----
-spring:
-  security:
-    oauth2:
-      client:
-        registration:
-          auth0:
-            provider: auth0
-            # MCP Inspector (Dynamic Client Registration)
-            client-id: 
-            client-secret: 
-            scope: openid, profile, email
-            # authorization-grant-type: authorization_code
-            # redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
-        provider:
-          auth0:
-            issuer-uri: https://dev-xxx.jp.auth0.com/
-            # authorization-uri: https://dev-xxx.jp.auth0.com
-            # token-uri: https://YOUR_AUTH0_DOMAIN/oauth/token
-            # user-info-uri: https://YOUR_AUTH0_DOMAIN/userinfo
-            # user-name-attribute: sub
-            # jwk-set-uri: https://YOUR_AUTH0_DOMAIN/.well-known/jwks.json
+# ---
+# spring:
+#   security:
+#     oauth2:
+#       client:
+#         registration:
+#           auth0:
+#             provider: auth0
+#             # MCP Inspector (Dynamic Client Registration)
+#             client-id: 
+#             client-secret: 
+#             scope: openid, profile, email
+#             # authorization-grant-type: authorization_code
+#             # redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+#         provider:
+#           auth0:
+#             issuer-uri: https://dev-xxx.jp.auth0.com/
+#             # authorization-uri: https://dev-xxx.jp.auth0.com
+#             # token-uri: https://YOUR_AUTH0_DOMAIN/oauth/token
+#             # user-info-uri: https://YOUR_AUTH0_DOMAIN/userinfo
+#             # user-name-attribute: sub
+#             # jwk-set-uri: https://YOUR_AUTH0_DOMAIN/.well-known/jwks.json

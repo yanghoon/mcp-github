@@ -1,10 +1,11 @@
-package slim.ai.github.adapter.mcp;
+package slim.ai.github.adapter.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import slim.ai.github.adapter.mcp.GitHubToolHandler;
 import slim.ai.github.adapter.mcp.token.OauthTokenProvider;
 
 @RestController
