@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  # https://docs.openwebui.com/getting-started/quick-start
+  # https://github.com/open-webui/open-webui#configuration
+  # https://github.com/open-webui/open-webui/blob/main/Dockerfile
+  # https://github.com/open-webui/open-webui/discussions/3677#discussioncomment-12140029
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    environment:
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=admin123
+      - OPENAI_API_BASE_URL=https://api.perplexity.ai/chat/completions
+      - OPENAI_API_KEY=
+    ports:
+      - 3000:8080
+    volumes:
+      - openwebui-data:/app/backend/data
+    restart: unless-stopped
+    extra_hosts:
+      - local:host-gateway
+
+volumes:
+  openwebui-data:
