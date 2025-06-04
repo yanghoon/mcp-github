@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 import slim.ai.annotation.Tools;
 import slim.ai.github.adapter.mcp.token.GitHubAccessTokenProvider;
+import slim.ai.github.adapter.mcp.token.GitHubAccessTokenProvider.EnvGitHubAccessTokenProvider;
 
 @Configuration
 public class McpConfig {
@@ -22,7 +23,7 @@ public class McpConfig {
 
     @Bean
     GitHubAccessTokenProvider accessTokenProvider() {
-        return new GitHubAccessTokenProvider();
+        return new EnvGitHubAccessTokenProvider();
     }
 
 }

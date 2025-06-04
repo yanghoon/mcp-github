@@ -23,3 +23,15 @@ mcpServers:
       GITHUB_URL: https://api.github.com
       GITHUB_TOKEN: ${GITHUB_TOKEN}
       GITHUB_USERNAME: ${GITHUB_USERNAME}
+
+---
+spring:
+  cloud:
+    openfeign:
+      httpclient:
+        hc5:
+          enabled: true
+      client:
+        config:
+          github:
+            url: ${mcpServers.github.env.GITHUB_URL}
