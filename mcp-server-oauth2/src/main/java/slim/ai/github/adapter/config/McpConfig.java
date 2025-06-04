@@ -5,11 +5,13 @@ import org.springframework.ai.tool.method.MethodToolCallbackProvider;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 
 import slim.ai.annotation.Tools;
-import slim.ai.github.adapter.mcp.token.GitHubAccessTokenProvider;
+import slim.ai.github.adapter.config.aop.McpServerAdvice;
 
 @Configuration
+// @EnableLoadTimeWeaving
 public class McpConfig {
         
     @Bean
@@ -21,8 +23,8 @@ public class McpConfig {
     }
 
     @Bean
-    GitHubAccessTokenProvider accessTokenProvider() {
-        return new GitHubAccessTokenProvider();
+    McpServerAdvice mcpServerAdvice(OAuth2AuthorizedClientService service) {
+        return new McpServerAdvice(service);
     }
-
+    
 }

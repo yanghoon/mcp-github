@@ -2,7 +2,7 @@
 
 # logging:
 #   level:
-#     org.springframework.security: TRACE
+#     slim.ai: DEBUG
 
 # Using spring-ai-starter-mcp-server-webmvc
 spring:
@@ -13,61 +13,13 @@ spring:
         version: 1.0.0
         type: ASYNC  # Recommended for reactive applications
         sse-message-endpoint: /mcp/messages
----
-spring:
-  security:
-    oauth2:
-      authorizationserver:
-        client:
-          public-client:
-            require-authorization-consent: false
-            require-proof-key: true
-            registration:
-              client-id: mcp-client
-              # client-secret: 
-              client-authentication-methods:
-                - none
-              authorization-grant-types:
-                - authorization_code
-              redirect-uris:
-                - http://localhost:6274/oauth/callback
-              scopes:
-                # - openid
-                - profile
-                - email
-      resourceserver:
-        jwt:
-          jwk-set-uri: http://localhost:8080/oauth2/jwks
-          jws-algorithms: RS256
----
-spring:
-  security:
-    oauth2:
-      client:
-        registration:
-          github:
-            client-id: 
-            client-secret: 
-            scope: read:user, user:email
-# ---
-# spring:
-#   security:
-#     oauth2:
-#       client:
-#         registration:
-#           auth0:
-#             provider: auth0
-#             # MCP Inspector (Dynamic Client Registration)
-#             client-id: 
-#             client-secret: 
-#             scope: openid, profile, email
-#             # authorization-grant-type: authorization_code
-#             # redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
-#         provider:
-#           auth0:
-#             issuer-uri: https://dev-xxx.jp.auth0.com/
-#             # authorization-uri: https://dev-xxx.jp.auth0.com
-#             # token-uri: https://YOUR_AUTH0_DOMAIN/oauth/token
-#             # user-info-uri: https://YOUR_AUTH0_DOMAIN/userinfo
-#             # user-name-attribute: sub
-#             # jwk-set-uri: https://YOUR_AUTH0_DOMAIN/.well-known/jwks.json
+
+server:
+  port: 8090
+
+mcpServers:
+  github:
+    env:
+      GITHUB_URL: https://api.github.com
+      GITHUB_TOKEN: ${GITHUB_TOKEN}
+      GITHUB_USERNAME: ${GITHUB_USERNAME}

@@ -3,24 +3,26 @@ package slim.ai.github.adapter.mcp;
 import org.springframework.ai.chat.model.ToolContext;
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.ai.tool.annotation.ToolParam;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import lombok.RequiredArgsConstructor;
+import io.modelcontextprotocol.server.McpSyncServerExchange;
 import slim.ai.annotation.Tools;
-import slim.ai.github.adapter.mcp.token.GitHubAccessTokenProvider;
+import slim.ai.github.adapter.config.aop.McpServerAdvice.McpSecurityContextHolder;
+import slim.ai.github.adapter.mcp.token.OauthTokenProvider;
 
 @Tools
-@RequiredArgsConstructor
 public class GitHubToolHandler {
 
-    private final GitHubAccessTokenProvider tokenProvider;
+    @Autowired
+    private OauthTokenProvider tokenProvider;
 
     /**
      * @see https://github.com/modelcontextprotocol/java-sdk/pull/215
      * @see https://github.com/modelcontextprotocol/java-sdk/pull/215/commits/1f1488677977e0ca6a949d33118350948a8a28af
      */
-    @Tool(description = "Get Username")
+    @Tool(description = "Get username")
     public String getUsername(ToolContext context) {
-        var token = tokenProvider.getAccessToken(context);
+        var token = McpSecurityContextHolder.accessToken(context);
         return "There are no repositories of " + token;
     }
     
