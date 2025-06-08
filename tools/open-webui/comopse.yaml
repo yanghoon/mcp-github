@@ -7,18 +7,47 @@ services:
   # https://github.com/open-webui/open-webui/discussions/3677#discussioncomment-12140029
   open-webui:
     image: ghcr.io/open-webui/open-webui:main
+    env_file: .env
     environment:
       - ADMIN_USERNAME=admin
       - ADMIN_PASSWORD=admin123
-      - OPENAI_API_BASE_URL=https://api.perplexity.ai/chat/completions
-      - OPENAI_API_KEY=
+      - OPENAI_API_BASE_URL=https://api.perplexity.ai/
+      # - OPENAI_API_KEY=
+      # - OLLAMA_BASE_URLS=http://ollama:11434
     ports:
       - 3000:8080
     volumes:
       - openwebui-data:/app/backend/data
-    restart: unless-stopped
+    extra_hosts:
+      - local:host-gateway
+  
+  # https://github.com/open-webui/mcpo
+  mcpo:
+    image: ghcr.io/open-webui/mcpo:main
+    command:
+     - --config
+     - /app/config.json
+    ports:
+      - 8000:8000
+    volumes:
+      - ./mcp/config.json:/app/config.json
     extra_hosts:
       - local:host-gateway
 
+  # docker exec -it ollama ollama run qwen3:8b
+  # docker exec -it ollama ollama run qwen3:1.7b
+  # docker exec -it ollama ollama run qwen3:0.6b
+  ollama:
+    profiles:
+      - disable
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - 11434:11434
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+
 volumes:
   openwebui-data:
+  ollama_data:

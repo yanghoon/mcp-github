@@ -3,6 +3,7 @@
 # logging:
 #   level:
 #     slim.ai: DEBUG
+#     org.springframework.ai: TRACE
 
 # Using spring-ai-starter-mcp-server-webmvc
 spring:

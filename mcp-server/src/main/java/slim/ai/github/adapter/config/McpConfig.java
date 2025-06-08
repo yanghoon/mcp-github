@@ -14,7 +14,7 @@ import slim.ai.github.adapter.mcp.token.GitHubAccessTokenProvider.EnvGitHubAcces
 public class McpConfig {
         
     @Bean
-    ToolCallbackProvider githubTools(ApplicationContext context) {
+    ToolCallbackProvider tools(ApplicationContext context) {
         var tools = context.getBeansWithAnnotation(Tools.class);
         return MethodToolCallbackProvider.builder()
                 .toolObjects(tools.values().toArray())

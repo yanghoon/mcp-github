@@ -1,0 +1,9 @@
+{
+    "mcpServers": {
+        "github": {
+            "type": "sse",
+            "url": "http://local:8090/sse",
+            "headers": {}
+        }
+    }
+}
