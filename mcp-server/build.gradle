@@ -1,7 +1,8 @@
 plugins {
+    id 'java'
     id 'org.springframework.boot' version '3.4.6'
     id 'io.spring.dependency-management' version '1.1.7'
-    id 'java'
+    id 'com.google.cloud.tools.jib' version '3.4.5'
 }
 
 version = '0.0.1-SNAPSHOT'
@@ -35,8 +36,8 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
     implementation 'io.github.openfeign:feign-httpclient'
 
-    compileOnly 'org.projectlombok:lombok:1.18.28'
-    annotationProcessor 'org.projectlombok:lombok:1.18.28'
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
@@ -45,4 +46,21 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+jib {
+    from {
+        image = 'eclipse-temurin:17-jre'
+    }
+    to {
+        image = 'slim/github-mcp'
+        tags = ['latest', version]
+    }
+    container {
+        ports = ['8090']
+        environment = [
+            'GITHUB_TOKEN': "",
+            'GITHUB_USERNAME': "",
+        ]
+    }
 }

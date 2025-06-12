@@ -33,6 +33,15 @@ services:
       - ./mcp/config.json:/app/config.json
     extra_hosts:
       - local:host-gateway
+  
+  github-mcp:
+    image: slim/github-mcp:latest
+    environment:
+      - GITHUB_URL
+      - GITHUB_TOKEN
+      - GITHUB_USERNAME
+    ports:
+      - 8090:8090
 
   # docker exec -it ollama ollama run qwen3:8b
   # docker exec -it ollama ollama run qwen3:1.7b
