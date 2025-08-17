@@ -22,7 +22,7 @@ public class McpConfig {
         var provider = MethodToolCallbackProvider.builder()
                 .toolObjects(tools.values().toArray())
                 .build();
-        return new ToolCallbackAdviceProvider(provider, advice);
+        return advice == null ? provider : new ToolCallbackAdviceProvider(provider, advice);
     }
 
     @Bean
